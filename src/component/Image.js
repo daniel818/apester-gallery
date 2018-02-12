@@ -3,9 +3,11 @@
  */
 import React from 'react'
 
-const Image = ({model, useColor, useLow, useStandard, index}) => {
-    const src = useLow ? model.low_resolution : '';
-    const src2 = useStandard ? model.standard_resolution : src;
+const Image = ({model, useThumb, useLow, useStandard, index}) => {
+
+    const src = useThumb ? model.thumbnail : '';
+    const src2 = useLow ? model.low_resolution : src;
+    const src3 = useStandard ? model.standard_resolution : src2;
 
     const imageStyle = {
         backgroundColor: model.prominentColor,
@@ -17,7 +19,7 @@ const Image = ({model, useColor, useLow, useStandard, index}) => {
 
     return (
         <div style={imageStyle}>
-            <img style={{ width: "100%"}} src={src2.url} />
+            <img style={{ width: "100%"}} src={src3.url}  alt={model.prominentColor}/>
         </div>
     );
 }

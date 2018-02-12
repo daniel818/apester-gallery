@@ -21,17 +21,17 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+            <state relative-caret-position="182">
+              <caret line="55" column="29" lean-forward="false" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-                <element signature="e#107#176#0" expanded="false" />
-                <element signature="n#!!block;n#getIndices#0;n#App#0" expanded="false" />
-                <element signature="e#1841#1860#0" expanded="false" />
-                <element signature="n#!!doc;n#calculateIndex#0;n#App#0" expanded="false" />
-                <element signature="n#!!block;n#calculateIndex#0;n#App#0" expanded="false" />
-                <element signature="n#!!block;n#componentDidMount#0;n#App#0" expanded="false" />
-                <element signature="n#!!block;n#componentWillUnmount#0;n#App#0" expanded="false" />
+                <marker date="1518438026503" expanded="false" signature="1467:1572" ph="{...}" />
+                <marker date="1518438026503" expanded="false" signature="1716:1819" ph="{...}" />
+                <marker date="1518438026503" expanded="false" signature="1974:2082" ph="{...}" />
+                <marker date="1518438026503" expanded="false" signature="2453:2808" ph="/** CalculateIndex: ...*/" />
+                <marker date="1518438026503" expanded="false" signature="2828:3064" ph="{...}" />
+                <marker date="1518438026503" expanded="false" signature="3087:3152" ph="{...}" />
+                <marker date="1518438026503" expanded="false" signature="3178:3246" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -40,8 +40,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="49" lean-forward="true" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+            <state relative-caret-position="375">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -50,8 +50,8 @@
       <file leaf-file-name="Image.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/Image.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="19" column="38" lean-forward="false" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+            <state relative-caret-position="75">
+              <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -293,12 +293,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1518389601314</updated>
-      <workItem from="1518389602632" duration="12012000" />
+      <workItem from="1518389602632" duration="16687000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12012000" />
+    <option name="totallyTimeSpent" value="16687000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="6" />
@@ -338,33 +338,41 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="49" lean-forward="true" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+        <state relative-caret-position="375">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gallery-data.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="0" column="899" lean-forward="false" selection-start-line="0" selection-start-column="890" selection-end-line="0" selection-end-column="899" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/Image.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="38" lean-forward="false" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+        <state relative-caret-position="75">
+          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+        <state relative-caret-position="182">
+          <caret line="55" column="29" lean-forward="false" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#107#176#0" expanded="false" />
-            <element signature="n#!!block;n#getIndices#0;n#App#0" expanded="false" />
-            <element signature="e#1841#1860#0" expanded="false" />
-            <element signature="n#!!doc;n#calculateIndex#0;n#App#0" expanded="false" />
-            <element signature="n#!!block;n#calculateIndex#0;n#App#0" expanded="false" />
-            <element signature="n#!!block;n#componentDidMount#0;n#App#0" expanded="false" />
-            <element signature="n#!!block;n#componentWillUnmount#0;n#App#0" expanded="false" />
+            <marker date="1518438026503" expanded="false" signature="1467:1572" ph="{...}" />
+            <marker date="1518438026503" expanded="false" signature="1716:1819" ph="{...}" />
+            <marker date="1518438026503" expanded="false" signature="1974:2082" ph="{...}" />
+            <marker date="1518438026503" expanded="false" signature="2453:2808" ph="/** CalculateIndex: ...*/" />
+            <marker date="1518438026503" expanded="false" signature="2828:3064" ph="{...}" />
+            <marker date="1518438026503" expanded="false" signature="3087:3152" ph="{...}" />
+            <marker date="1518438026503" expanded="false" signature="3178:3246" ph="{...}" />
           </folding>
         </state>
       </provider>

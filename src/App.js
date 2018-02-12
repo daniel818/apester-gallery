@@ -3,19 +3,18 @@ import Image from "./component/Image";
 
 import _ from "lodash";
 
-// const Image = ({model, useColor, useLow, useStandard, index}) => {
-//   const src = useLow ? model.low_resolution : '';
-//   const src2 = useStandard ? model.standard_resolution : src;
-//   return (
-//     <div style={{ backgroundColor: model.prominentColor, position: "absolute", width: "100%", height: "100vw", transform: `translateY(${index * 100}%)` }}>
-//        <img style={{ }} src={src2.url} />
-//     </div>
-//     );
-// }
-const STANDARD = 1;
+const STANDARD_RES = 1;
 const LOW_RES = 4;
-const THUMBNAIL = 30;
-const COLOR = 8;
+const THUMBNAIL_RES = 6;
+const WINDOW_SIZE = 8;
+
+const RANGES = [
+  { type: "windowRange", name: WINDOW_SIZE },
+  { type: "thumbnail", name: THUMBNAIL_RES },
+
+  { type: "lowRange", name: LOW_RES },
+  { type: "standardRange", name: STANDARD_RES }
+];
 
 class App extends Component {
   constructor(props) {
@@ -27,41 +26,64 @@ class App extends Component {
 
     // bind methods
     this.calculateIndex = this.calculateIndex.bind(this);
-    this.getIndices = this.getIndices.bind(this);
-  }
-
-  //getting the minIndex and maxIndex ( of each resolution )
-  getIndices(start, end, index, offset) {
-    return {
-      index,
-      minIndex: Math.max(start, index - offset),
-      maxIndex: Math.min(end, index + offset)
-    };
   }
 
   renderImages() {
     const { data } = this.props;
     const { activeIndex } = this.state;
     const length = data.length - 1;
-    const colorRange = _.range(
-      Math.max(activeIndex - COLOR, 0),
-      Math.min(activeIndex + COLOR, length),
-      1
-    );
 
-    const slidingWindow = colorRange.map(i => {
-      return { index: i, useStandard: true };
+    //Array that hold the type of range and the array of ranges
+    const ranges = RANGES.map(range => {
+      return {
+        type: range.type,
+        range: _.range(
+          Math.max(activeIndex - WINDOW_SIZE, 0),
+          Math.min(activeIndex + range.name, length),
+          1
+        )
+      };
+    });
+
+    //Destructuring
+    const {
+      windowRange = ranges[0],
+      thumRange = ranges[1],
+      lowRange = ranges[2],
+      standardRange = ranges[3]
+    } = ranges;
+
+    const slidingWindow = windowRange.range.map(i => {
+      return { index: i, useColor: true };
+    });
+
+    //Itirate over the thumb res range and check if its in the window range => if it is update useThumb to true
+    thumRange.range.forEach(i => {
+      const obj = _.find(slidingWindow, winObj => winObj.index === i);
+      obj.useThumb = true;
+    });
+
+    //Itirate over the low res range and check if its in the window range => if it is update useLow to true
+    lowRange.range.forEach(i => {
+      const obj = _.find(slidingWindow, winObj => winObj.index === i);
+      obj.useLow = true;
+    });
+
+    //Itirate over the stnd res range and check if its in the window range => if it is update useStandard to true
+    standardRange.range.forEach(i => {
+      const obj = _.find(slidingWindow, winObj => winObj.index === i);
+      obj.useStandard = true;
     });
 
     return slidingWindow.map(mapping => {
-      const { useColor, useLow, useStandard, index } = mapping;
+      const { useThumb, useLow, useStandard, index } = mapping;
       const model = data[index];
 
       return (
         <Image
           key={index}
           index={index}
-          useColor={useColor}
+          useThumb={useThumb}
           useLow={useLow}
           useStandard={useStandard}
           model={model}
@@ -69,67 +91,6 @@ class App extends Component {
       );
     });
   }
-
-  // renderImages() {
-  //   const { data } = this.props;
-  //   const { activeIndex } = this.state;
-  //   const length = data.length - 1;
-  //   const color = this.getIndices(0, length, activeIndex, COLOR); // { minIndex: 0, maxIndex: 50 }
-  //   const low = this.getIndices(0, length, activeIndex, LOW_RES);
-  //
-  //   // const standard = Range(0, length, data, activeIndex, STANDARD);
-  //   const slidingWindow = {
-  //     mappings: [],
-  //     models: []
-  //   };
-  //
-  //   const colorRange = _.range(color.minIndex, color.maxIndex, 1);
-  //   const lowRange = _.range(low.minIndex, low.maxIndex, 1);
-  //   console.log("coloerRange", colorRange);
-  //   console.log("lowRange", lowRange);
-  //
-  //   const renderColor = colorRange.map(i => {
-  //     const scaleIndex = i - color.minIndex;
-  //     //console.log("i", i);
-  //     //console.log("scaleIndex", scaleIndex);
-  //     slidingWindow.mappings[scaleIndex] = { useStandard: true };
-  //     slidingWindow.models[scaleIndex] = data[i];
-  //   });
-  //
-  //   //const renderLow = lowRange.map(i => {
-  //     //const scaleIndex = i - color.minIndex;
-  //     //slidingWindow.mappings[scaleIndex] = { useLow: true };
-  //     //return { useLow: true };
-  //   //});
-  //   //console.log(renderLow);
-  //
-  //   //slidingWindow.mappings.splice(lowRange[0], 0, ...renderLow);
-  //   //
-  //   // for (let i = colorRange[0]; i < slidingWindow.mappings.length; i++) {
-  //   //   slidingWindow.models[i] = data[i];
-  //   //   console.log(slidingWindow.models);
-  //   // }
-  //
-  //   console.log("mapping", slidingWindow.mappings);
-  //   console.log("low", low);
-  //   console.log("color", color);
-  //
-  //   return slidingWindow.mappings.map((mapping, i) => {
-  //     const { useColor, useLow, useStandard } = mapping;
-  //     const model = slidingWindow.models[i];
-  //
-  //     return (
-  //       <Image
-  //         key={i}
-  //         index={i + color.minIndex}
-  //         useColor={useColor}
-  //         useLow={useLow}
-  //         useStandard={useStandard}
-  //         model={model}
-  //       />
-  //     );
-  //   });
-  // }
 
   /**
    * CalculateIndex:
@@ -155,7 +116,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("render");
     const { data } = this.props;
     const scrollStyle = { height: data.length * window.innerWidth }; //Make the scroller realistic to the  number of images
 
