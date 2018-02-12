@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import gallery from './gallery-data.json';
+
+import './index.css';
+import registerServiceWorker from './registerServiceWorker';
 
 
 ReactDOM.render(<App data={gallery}/>, document.getElementById('root'));
