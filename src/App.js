@@ -15,7 +15,7 @@ const RANGES = [
   { type: "standardRange", name: STANDARD_RES }
 ];
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
 
@@ -24,9 +24,6 @@ class App extends Component {
     };
     // bind methods
     this.calculateIndex = this.calculateIndex.bind(this);
-    this.createRanges = this.createRanges.bind(this);
-    this.updateImageResolution = this.updateImageResolution.bind(this);
-    this.renderImages = this.renderImages.bind(this);
   }
 
   componentDidMount() {
@@ -109,25 +106,6 @@ class App extends Component {
     this.updateImageResolution(thumRange.range, slidingWindow, "useThumb");
     this.updateImageResolution(lowRange.range, slidingWindow, "useLow");
     this.updateImageResolution(standardRange.range, slidingWindow, "useStandard");
-    // // Iterate over the thumb res range and check if its in the window range => if it is update useThumb to true
-    // thumRange.range.forEach(i => {
-    //   const obj = _.find(slidingWindow, winObj => winObj.index === i);
-    //   obj.useThumb = true;
-    // });
-    //
-    //
-    //
-    // // Iterate over the low res range and check if its in the window range => if it is update useLow to true
-    // lowRange.range.forEach(i => {
-    //   const obj = _.find(slidingWindow, winObj => winObj.index === i);
-    //   obj.useLow = true;
-    // });
-    //
-    // // Iterate over the standard res range and check if its in the window range => if it is , update useStandard to true
-    // standardRange.range.forEach(i => {
-    //   const obj = _.find(slidingWindow, winObj => winObj.index === i);
-    //   obj.useStandard = true;
-    // });
 
     return slidingWindow.map(mapping => {
 
@@ -159,4 +137,4 @@ class App extends Component {
   }
 }
 
-export default App;
+
