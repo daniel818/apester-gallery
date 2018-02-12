@@ -25,7 +25,7 @@ class App extends Component {
     // bind methods
     this.calculateIndex = this.calculateIndex.bind(this);
     this.createRanges = this.createRanges.bind(this);
-    this.updateImageRes = this.updateImageRes.bind(this);
+    this.updateImageResolution = this.updateImageResolution.bind(this);
     this.renderImages = this.renderImages.bind(this);
   }
 
@@ -78,14 +78,14 @@ class App extends Component {
   /**
    *  Iterate over the [type] res range and check if its
    *  in the window range => if it is update [type] to true
-   * @param array
+   * @param rangeArray
    * @param slidingWindow
-   * @param type
+   * @param imageType
    */
-  updateImageRes(array, slidingWindow, type) {
-    array.forEach(i => {
+  updateImageResolution(rangeArray, slidingWindow, imageType) {
+    rangeArray.forEach(i => {
       const obj = _.find(slidingWindow, winObj => winObj.index === i);
-      obj[type] = true;
+      obj[imageType] = true;
     });
   }
 
@@ -106,9 +106,9 @@ class App extends Component {
       return { index: i, useColor: true };
     });
 
-    this.updateImageRes(thumRange.range, slidingWindow, "useThumb");
-    this.updateImageRes(lowRange.range, slidingWindow, "useLow");
-    this.updateImageRes(standardRange.range, slidingWindow, "useStandard");
+    this.updateImageResolution(thumRange.range, slidingWindow, "useThumb");
+    this.updateImageResolution(lowRange.range, slidingWindow, "useLow");
+    this.updateImageResolution(standardRange.range, slidingWindow, "useStandard");
     // // Iterate over the thumb res range and check if its in the window range => if it is update useThumb to true
     // thumRange.range.forEach(i => {
     //   const obj = _.find(slidingWindow, winObj => winObj.index === i);
