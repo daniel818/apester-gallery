@@ -5,9 +5,9 @@ import React from 'react'
 
 const Image = ({model, useThumb, useLow, useStandard, index}) => {
 
-    const src = useThumb ? model.thumbnail : '';
-    const src2 = useLow ? model.low_resolution : src;
-    const src3 = useStandard ? model.standard_resolution : src2;
+    const isThumbnail = useThumb ? model.thumbnail : '';
+    const isLowRes = useLow ? model.low_resolution : isThumbnail;
+    const isStandard = useStandard ? model.standard_resolution : isLowRes;
 
     const imageStyle = {
         backgroundColor: model.prominentColor,
@@ -19,7 +19,7 @@ const Image = ({model, useThumb, useLow, useStandard, index}) => {
 
     return (
         <div style={imageStyle}>
-            <img style={{ width: "100%"}} src={src3.url}  alt={model.prominentColor}/>
+            <img style={{ width: "100%"}} src={isStandard.url}  alt={model.prominentColor}/>
         </div>
     );
 }
