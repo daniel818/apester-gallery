@@ -17,7 +17,7 @@ const Image = ({model, useColor, useLow, useStandard, index}) => {
 
     return (
         <div style={imageStyle}>
-            <img style={{ }} src={src2.url} />
+            <img style={{ width: "100%"}} src={src2.url} />
         </div>
     );
 }

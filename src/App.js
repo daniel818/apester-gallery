@@ -27,7 +27,7 @@ class App extends Component {
 
     // bind methods
     this.calculateIndex = this.calculateIndex.bind(this);
-    this.getIndices = this.getIndices.bind(this)
+    this.getIndices = this.getIndices.bind(this);
   }
 
   //getting the minIndex and maxIndex ( of each resolution )
@@ -43,54 +43,24 @@ class App extends Component {
     const { data } = this.props;
     const { activeIndex } = this.state;
     const length = data.length - 1;
-    const color = this.getIndices(0, length, activeIndex, COLOR); // { minIndex: 0, maxIndex: 50 }
-    const low = this.getIndices(0, length, activeIndex, LOW_RES);
+    const colorRange = _.range(
+      Math.max(activeIndex - COLOR, 0),
+      Math.min(activeIndex + COLOR, length),
+      1
+    );
 
-    // const standard = Range(0, length, data, activeIndex, STANDARD);
-    const slidingWindow = {
-      mappings: [],
-      models: []
-    };
-
-    const colorRange = _.range(color.minIndex, color.maxIndex, 1);
-    const lowRange = _.range(low.minIndex, low.maxIndex, 1);
-    console.log("coloerRange", colorRange);
-    console.log("lowRange", lowRange);
-
-    const renderColor = colorRange.map(i => {
-      const scaleIndex = i - color.minIndex;
-      //console.log("i", i);
-      //console.log("scaleIndex", scaleIndex);
-      slidingWindow.mappings[scaleIndex] = { useColor: true };
-      //slidingWindow.models[scaleIndex] = data[i];
+    const slidingWindow = colorRange.map(i => {
+      return { index: i, useStandard: true };
     });
 
-    const renderLow = lowRange.map(i => {
-      //const scaleIndex = i - color.minIndex;
-      //slidingWindow.mappings[scaleIndex] = { useLow: true };
-      return { useLow: true };
-    });
-    console.log(renderLow);
-
-    slidingWindow.mappings.splice(lowRange[0], 0, ...renderLow);
-
-    for (let i = colorRange[0]; i < slidingWindow.mappings.length; i++) {
-      slidingWindow.models[i] = data[i];
-      console.log(slidingWindow.models);
-    }
-
-    console.log("mapping", slidingWindow.mappings);
-    console.log("low", low);
-    console.log("color", color);
-
-    return slidingWindow.mappings.map((mapping, i) => {
-      const { useColor, useLow, useStandard } = mapping;
-      const model = slidingWindow.models[i];
+    return slidingWindow.map(mapping => {
+      const { useColor, useLow, useStandard, index } = mapping;
+      const model = data[index];
 
       return (
         <Image
-          key={i}
-          index={i + color.minIndex}
+          key={index}
+          index={index}
           useColor={useColor}
           useLow={useLow}
           useStandard={useStandard}
@@ -99,6 +69,67 @@ class App extends Component {
       );
     });
   }
+
+  // renderImages() {
+  //   const { data } = this.props;
+  //   const { activeIndex } = this.state;
+  //   const length = data.length - 1;
+  //   const color = this.getIndices(0, length, activeIndex, COLOR); // { minIndex: 0, maxIndex: 50 }
+  //   const low = this.getIndices(0, length, activeIndex, LOW_RES);
+  //
+  //   // const standard = Range(0, length, data, activeIndex, STANDARD);
+  //   const slidingWindow = {
+  //     mappings: [],
+  //     models: []
+  //   };
+  //
+  //   const colorRange = _.range(color.minIndex, color.maxIndex, 1);
+  //   const lowRange = _.range(low.minIndex, low.maxIndex, 1);
+  //   console.log("coloerRange", colorRange);
+  //   console.log("lowRange", lowRange);
+  //
+  //   const renderColor = colorRange.map(i => {
+  //     const scaleIndex = i - color.minIndex;
+  //     //console.log("i", i);
+  //     //console.log("scaleIndex", scaleIndex);
+  //     slidingWindow.mappings[scaleIndex] = { useStandard: true };
+  //     slidingWindow.models[scaleIndex] = data[i];
+  //   });
+  //
+  //   //const renderLow = lowRange.map(i => {
+  //     //const scaleIndex = i - color.minIndex;
+  //     //slidingWindow.mappings[scaleIndex] = { useLow: true };
+  //     //return { useLow: true };
+  //   //});
+  //   //console.log(renderLow);
+  //
+  //   //slidingWindow.mappings.splice(lowRange[0], 0, ...renderLow);
+  //   //
+  //   // for (let i = colorRange[0]; i < slidingWindow.mappings.length; i++) {
+  //   //   slidingWindow.models[i] = data[i];
+  //   //   console.log(slidingWindow.models);
+  //   // }
+  //
+  //   console.log("mapping", slidingWindow.mappings);
+  //   console.log("low", low);
+  //   console.log("color", color);
+  //
+  //   return slidingWindow.mappings.map((mapping, i) => {
+  //     const { useColor, useLow, useStandard } = mapping;
+  //     const model = slidingWindow.models[i];
+  //
+  //     return (
+  //       <Image
+  //         key={i}
+  //         index={i + color.minIndex}
+  //         useColor={useColor}
+  //         useLow={useLow}
+  //         useStandard={useStandard}
+  //         model={model}
+  //       />
+  //     );
+  //   });
+  // }
 
   /**
    * CalculateIndex:
