@@ -3,11 +3,11 @@ import Image from "./component/Image";
 
 import _ from "lodash";
 
+//Constants
 const STANDARD_RES = 1;
 const LOW_RES = 4;
 const THUMBNAIL_RES = 6;
 const WINDOW_SIZE = 8;
-
 const RANGES = [
   { type: "windowRange", name: WINDOW_SIZE },
   { type: "thumbnail", name: THUMBNAIL_RES },
@@ -23,11 +23,36 @@ class App extends Component {
     this.state = {
       activeIndex: 0
     };
-
     // bind methods
     this.calculateIndex = this.calculateIndex.bind(this);
   }
+  componentDidMount() {
+    window.addEventListener("scroll", this.calculateIndex);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.calculateIndex);
+  }
 
+  /**
+   * CalculateIndex:
+   * step 1 - position off y axis / width (=height) gives you the index of the image in (0,0)
+   * step 2 - calculate the number of images in view total height / image width (=height)
+   * step 3 - divde step 2 result by two to get the center image offset
+   * step 3 - add step 1 and step 3 to find the currect center index
+   */
+  calculateIndex() {
+    const activeIndex = Math.floor(
+      window.scrollY / window.innerWidth +
+        window.innerHeight / window.innerWidth / 2
+    );
+    if (this.state.activeIndex !== activeIndex) {
+      this.setState({ activeIndex });
+    }
+  }
+
+  /**
+   * Render The images Resolution by range of each resolution Type
+   */
   renderImages() {
     const { data } = this.props;
     const { activeIndex } = this.state;
@@ -38,13 +63,12 @@ class App extends Component {
       return {
         type: range.type,
         range: _.range(
-          Math.max(activeIndex - WINDOW_SIZE, 0),
+          Math.max(activeIndex - range.name, 0),
           Math.min(activeIndex + range.name, length),
           1
         )
       };
     });
-
     //Destructuring
     const {
       windowRange = ranges[0],
@@ -90,29 +114,6 @@ class App extends Component {
         />
       );
     });
-  }
-
-  /**
-   * CalculateIndex:
-   * step 1 - position off y axis / width (=height) gives you the index of the image in (0,0)
-   * step 2 - calculate the number of images in view total height / image width (=height)
-   * step 3 - divde step 2 result by two to get the center image offset
-   * step 3 - add step 1 and step 3 to find the currect center index
-   */
-  calculateIndex() {
-    const activeIndex = Math.floor(
-      window.scrollY / window.innerWidth +
-        window.innerHeight / window.innerWidth / 2
-    );
-    if (this.state.activeIndex !== activeIndex) {
-      this.setState({ activeIndex });
-    }
-  }
-  componentDidMount() {
-    window.addEventListener("scroll", this.calculateIndex);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.calculateIndex);
   }
 
   render() {
