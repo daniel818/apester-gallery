@@ -12,15 +12,6 @@ import _ from "lodash";
 //     </div>
 //     );
 // }
-
-const getIndices = (start, end, index, offset) => {
-  return {
-    index,
-    minIndex: Math.max(start, index - offset),
-    maxIndex: Math.min(end, index + offset)
-  };
-};
-
 const STANDARD = 1;
 const LOW_RES = 4;
 const THUMBNAIL = 30;
@@ -36,14 +27,24 @@ class App extends Component {
 
     // bind methods
     this.calculateIndex = this.calculateIndex.bind(this);
+    this.getIndices = this.getIndices.bind(this)
+  }
+
+  //getting the minIndex and maxIndex ( of each resolution )
+  getIndices(start, end, index, offset) {
+    return {
+      index,
+      minIndex: Math.max(start, index - offset),
+      maxIndex: Math.min(end, index + offset)
+    };
   }
 
   renderImages() {
     const { data } = this.props;
     const { activeIndex } = this.state;
     const length = data.length - 1;
-    const color = getIndices(0, length, activeIndex, COLOR); // { minIndex: 0, maxIndex: 50 }
-    const low = getIndices(0, length, activeIndex, LOW_RES);
+    const color = this.getIndices(0, length, activeIndex, COLOR); // { minIndex: 0, maxIndex: 50 }
+    const low = this.getIndices(0, length, activeIndex, LOW_RES);
 
     // const standard = Range(0, length, data, activeIndex, STANDARD);
     const slidingWindow = {
@@ -58,20 +59,27 @@ class App extends Component {
 
     const renderColor = colorRange.map(i => {
       const scaleIndex = i - color.minIndex;
-      console.log("i", i);
-      console.log("scaleIndex", scaleIndex);
+      //console.log("i", i);
+      //console.log("scaleIndex", scaleIndex);
       slidingWindow.mappings[scaleIndex] = { useColor: true };
-      slidingWindow.models[scaleIndex] = data[i];
+      //slidingWindow.models[scaleIndex] = data[i];
     });
 
     const renderLow = lowRange.map(i => {
-      const scaleIndex = i - color.minIndex;
-      slidingWindow.mappings[scaleIndex] = { useLow: true };
+      //const scaleIndex = i - color.minIndex;
+      //slidingWindow.mappings[scaleIndex] = { useLow: true };
+      return { useLow: true };
     });
+    console.log(renderLow);
 
-    //arrc.splice(activeIndex, 0, ...arrR);
+    slidingWindow.mappings.splice(lowRange[0], 0, ...renderLow);
 
-    console.log(slidingWindow.mappings);
+    for (let i = colorRange[0]; i < slidingWindow.mappings.length; i++) {
+      slidingWindow.models[i] = data[i];
+      console.log(slidingWindow.models);
+    }
+
+    console.log("mapping", slidingWindow.mappings);
     console.log("low", low);
     console.log("color", color);
 
@@ -93,7 +101,7 @@ class App extends Component {
   }
 
   /**
-   * Some Math:
+   * CalculateIndex:
    * step 1 - position off y axis / width (=height) gives you the index of the image in (0,0)
    * step 2 - calculate the number of images in view total height / image width (=height)
    * step 3 - divde step 2 result by two to get the center image offset
@@ -118,11 +126,11 @@ class App extends Component {
   render() {
     console.log("render");
     const { data } = this.props;
-    const renderedImages = this.renderImages();
+    const scrollStyle = { height: data.length * window.innerWidth }; //Make the scroller realistic to the  number of images
 
     return (
-      <div className="App" style={{ height: data.length * window.innerWidth }}>
-        {renderedImages}
+      <div className="App" style={scrollStyle}>
+        {this.renderImages()}
       </div>
     );
   }
