@@ -84,7 +84,7 @@ export default class ImageGallery extends Component {
    * @param slidingWindow
    * @param imageType
    */
-  updateImageResolution(resolutionRangeArray, slidingWindow, imageType) {
+  updateImagesResolution(resolutionRangeArray, slidingWindow, imageType) {
     resolutionRangeArray.forEach(i => {
       const imageObj = _.find(slidingWindow, winObj => winObj.index === i);
       imageObj[imageType] = true;
@@ -107,17 +107,17 @@ export default class ImageGallery extends Component {
       return { index: i, useColor: true };
     });
 
-    this.updateImageResolution(
+    this.updateImagesResolution(
       thumbnailRange.range,
       slidingWindow,
       "useThumbnail"
     );
-    this.updateImageResolution(
+    this.updateImagesResolution(
       lowResolutionRange.range,
       slidingWindow,
       "useLowResolution"
     );
-    this.updateImageResolution(
+    this.updateImagesResolution(
       standardResolutionRange.range,
       slidingWindow,
       "useStandardResolution"

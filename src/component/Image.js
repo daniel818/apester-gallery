@@ -10,7 +10,6 @@ const Image = ({
   useStandardResolution,
   index
 }) => {
-
   const isThumbnail = useThumbnail ? imageModel.thumbnail : "";
   const isLowRes = useLowResolution ? imageModel.low_resolution : isThumbnail;
   const isStandard = useStandardResolution
