@@ -91,7 +91,7 @@ export default class ImageGallery extends Component {
   }
 
   /**
-   *  Render the images Resolution by range of each resolution Type
+   *  Render the images Resolution by their range resolution Type
    */
   renderImages() {
     const ResolutionsRanges = this.getResolutionRanges(RESOLUTION_RANGES);
