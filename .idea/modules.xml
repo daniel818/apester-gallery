@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/apester-galley.iml" filepath="$PROJECT_DIR$/.idea/apester-galley.iml" />
+      <module fileurl="file://$USER_HOME$/apester-gallery/.idea/apester-galley.iml" filepath="$USER_HOME$/apester-gallery/.idea/apester-galley.iml" />
     </modules>
   </component>
 </project>

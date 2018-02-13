@@ -8,9 +8,9 @@ import _ from "lodash";
 
 //Constants
 const STANDARD_RESOLUTION = 5;
-const LOW_RESOLUTION = 10;
-const THUMBNAIL_RESOLUTION = 20;
-const WINDOW_SIZE = 40;
+const LOW_RESOLUTION = 75;
+const THUMBNAIL_RESOLUTION = 150;
+const WINDOW_SIZE = 250;
 const RESOLUTION_RANGES = [
   { type: "windowRange", name: WINDOW_SIZE },
   { type: "thumbnailRange", name: THUMBNAIL_RESOLUTION },
@@ -30,8 +30,8 @@ export default class ImageGallery extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.calculateIndex);
-    window.addEventListener("resize", this.calculateIndex);
+    window.addEventListener("scroll", _.debounce(this.calculateIndex,50));
+    window.addEventListener("resize", _.debounce(this.calculateIndex,50));
   }
   componentWillUnmount() {
     window.removeEventListener("scroll", this.calculateIndex);
