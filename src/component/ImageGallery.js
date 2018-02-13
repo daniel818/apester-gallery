@@ -77,8 +77,9 @@ export default class ImageGallery extends Component {
   }
 
   /**
-   * Iterate over the [type]resolution range and check the
-   * location in the Array, update accordingly to the resolution type
+   * Iterate over the [type]resolution range and for each element check
+   * if its index in the sliding window and update accordingly to the resolution type
+   *  
    * @param resolutionRangeArray
    * @param slidingWindow
    * @param imageType
