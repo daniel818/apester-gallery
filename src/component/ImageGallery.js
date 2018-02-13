@@ -45,7 +45,6 @@ export default class ImageGallery extends Component {
    * Step 3 - Add step 1 and step 3 to find the current center index
    */
   calculateIndex() {
-      console.log("hello")
     const imagesPerWindow = window.innerHeight / window.innerWidth;
     const activeIndex = Math.floor(
       window.scrollY / window.innerWidth + imagesPerWindow / 2
